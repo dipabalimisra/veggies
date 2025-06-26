@@ -1,0 +1,112 @@
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    /* More vertical space */
+    margin-bottom: 40px;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    /* Modern font stack */
+}
+
+.pagination-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 6px;
+    /* Slightly reduced gap for a tighter feel */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* Subtle shadow around the whole pagination */
+    border-radius: 12px;
+    /* Nicely rounded container */
+    overflow: hidden;
+    /* Ensures shadow and border-radius apply well */
+    background-color: #fff;
+    /* White background for the list container */
+}
+
+.pagination-item {
+    display: inline-block;
+}
+
+.pagination-link {
+    /* Common styles for all links */
+    background-color: transparent;
+    /* Start with transparent background */
+    border: none;
+    /* Remove default border */
+    padding: 12px 18px;
+    /* Generous padding for easier clicks */
+    cursor: pointer;
+    font-size: 1rem;
+    color: #555;
+    /* Softer text color */
+    font-weight: 500;
+    /* Medium font weight */
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.1s ease;
+    min-width: 48px;
+    /* Minimum width for number buttons */
+    text-align: center;
+    display: block;
+    /* Make the whole button clickable area */
+    border-radius: 0;
+    /* No individual button border-radius, handled by list parent */
+}
+
+/* Hover state for non-active, non-disabled links */
+.pagination-link:hover:not(:disabled):not(.active) {
+    background-color: #f2f2f2;
+    /* Light grey hover */
+    color: #222;
+    transform: translateY(-2px);
+    /* Slight lift effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow on hover */
+}
+
+/* Active page link */
+.pagination-item.active .pagination-link {
+    background-color: #007bff;
+    /* Primary blue for active page */
+    color: white;
+    font-weight: 600;
+    /* Bolder font for active */
+    cursor: default;
+    /* No pointer for active page */
+    transform: translateY(0);
+    /* Reset transform */
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    /* Distinct shadow for active */
+}
+
+.pagination-item.active .pagination-link:hover {
+    background-color: #007bff;
+    /* Keep same background on hover for active */
+    color: white;
+    transform: translateY(0);
+    /* No lift on hover for active */
+}
+
+/* Disabled links */
+.pagination-link:disabled {
+    background-color: #fafafa;
+    /* Very light grey */
+    color: #bbb;
+    /* Light grey text */
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: translateY(0);
+    /* Reset transform */
+    box-shadow: none;
+    /* No shadow for disabled */
+}
+
+/* Specific styling for 'Previous' and 'Next' buttons */
+.pagination-item:first-child .pagination-link {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.pagination-item:last-child .pagination-link {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px; }

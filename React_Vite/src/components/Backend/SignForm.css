@@ -1,0 +1,27 @@
+.submit{
+    padding-inline: 40px;
+    margin: 20px;
+    max-width: max-content;
+    position: relative;
+    background-color: palegreen;
+    font-weight: 700;
+    color: black;
+
+}
+
+.signform{
+    padding: 20px;
+        display: grid;
+        gap: 15px;
+        margin: 20px;
+}
+
+.signformInput{
+    padding: 10px;
+    margin: 10px;
+}
+
+.main{
+    background-color: greenyellow;
+    position: relative;
+}

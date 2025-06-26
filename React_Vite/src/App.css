@@ -1,0 +1,863 @@
+body,
+.overlay-wrapper { /* Or whatever element you use */
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Full viewport height */
+  width: 100%; /* Full viewport width */
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
+  position: relative; /* Needed for absolute positioning of the overlay */
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('img/overlay.jpg'); /* Replace with your image path */
+    background-size: cover; /* Cover the entire area */
+    background-repeat: no-repeat;
+    z-index: 1000; /* Ensure it's on top of other content */
+    /* Initial opacity (fully visible) */
+    opacity: 1;
+    /* Transition for a smooth fade-out effect */
+    transition: opacity 0.5s ease-in-out;
+
+  }
+
+  /* Optional: Style for the text over the image */
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-80%, -50%); /* Center the text */
+  color: rgba(170, 107, 12, 0.801);
+  font-size: 2rem;
+  text-align: center;
+  z-index: 1001; /* Above the image */
+}
+
+.overlay.hidden {
+  opacity: 0; /* Make the overlay transparent */
+  pointer-events: none; /* Make overlay non-clickable */
+}
+
+  .heading {
+  font-family: 'Arial', sans-serif; /* Or your brand's primary font */
+  font-size: 2.8rem; /* Large and prominent */
+  font-weight: 700; /* Bold */
+  color: #333; /* Dark gray for good readability */
+  text-align: center; /* Centered on the page */
+  margin-top: 5.5rem;
+  margin-bottom: 2.5rem; /* Space below the heading */
+  padding-bottom: 0.8rem; /* Creates space for a subtle line below */
+  position: relative; /* Needed for the pseudo-element line */
+  text-transform: uppercase; /* All caps for emphasis */
+  letter-spacing: 0.05em; /* Slightly spaced out letters */
+}
+
+.navbar{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+}
+
+body { 
+  font-size: 18px; 
+  background-image: url('img/bg_final.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+
+.product-grid-container {
+  display: grid; /* Use CSS Grid for layout */
+  gap: 20px; /* Space between grid items */
+  padding: 10px; /* Padding around the entire grid */
+  margin: 0 auto; /* Center the container if it has a max-width */
+  max-width: 1200px; /* Max width for the entire grid on very large screens */
+
+  /* Default for Mobile (1 column) - Mobile-First Approach */
+  grid-template-columns: 1fr; /* One column on small screens */
+
+  /* Optional: Adjust for small screens (e.g., small tablets in portrait) */
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(1, 1fr); /* 2 columns for small screens and up */
+  }
+
+  /* Medium screens (e.g., tablets in landscape, small laptops) */
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); /* 3 columns for medium screens and up */
+  }
+
+  /* Large screens (e.g., desktops) */
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for large screens and up */
+  }
+
+  /* Extra large screens (optional, if you need even more columns) */
+  @media (min-width: 1200px) {
+    /* grid-template-columns: repeat(5, 1fr); */
+  }
+}
+
+/* Styling for an individual product box */
+.product-box {
+  background-color: #ffffff; /* White background */
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 8px; /* Slightly rounded corners */
+  padding: 10px; /* Inner padding */
+  text-align: center; /* Center align content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth hover effects */
+  display: flex; /* Use flexbox for internal layout if needed */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: space-between; /* Push button to bottom */
+}
+
+.product-box:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+/* Image styling */
+.product-image-wrapper {
+  margin-bottom: 15px;
+  min-height: 268px;
+  overflow: hidden; /* Hide parts of the image if it exceeds bounds after scaling */
+  border-radius: 4px; /* Optional: slightly rounded corners for image */
+}
+
+.product-image {
+  max-width: 100%; /* Ensures image is never wider than its container */
+  height: auto; /* Maintains aspect ratio */
+  display: block; /* Removes extra space below image */
+  margin: 0 auto; /* Center image horizontally */
+  /* Optional: make images consistent size for grid if aspect ratio allows */
+  /* height: 200px; object-fit: cover; width: 100%; */
+}
+
+/* Title styling */
+.product-title {
+  font-family: 'Roboto', sans-serif; /* Or your chosen font */
+  font-size: 1.2rem; /* Medium size for readability */
+  font-weight: 600; /* Semi-bold */
+  color: #333;
+  margin-top: 0; /* Remove default top margin */
+  margin-bottom: 10px; /* Space below title */
+  line-height: 1.3;
+  min-height: 3.9rem; /* Ensures consistent height for 2-3 lines of text */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box; /* For multi-line ellipsis in Webkit browsers */
+  line-clamp: 3; /* Max number of lines */
+  -webkit-box-orient: vertical;
+}
+
+/* Price styling */
+.product-price {
+  font-family: 'Open Sans', sans-serif; /* Or your chosen font */
+  font-size: 1.4rem; /* Prominent price */
+  font-weight: 700; /* Bold */
+  color: #007bff; /* Highlight color for price (e.g., blue) */
+  margin-bottom: 15px; /* Space below price */
+}
+
+/* Description styling (optional, for longer descriptions) */
+.product-description {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  min-height: 4.5rem; /* Ensure consistent height for description */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-clamp: 3; /* Max 3 lines for description */
+  -webkit-box-orient: vertical;
+}
+
+/* Add to Cart Button styling */
+.add-to-cart-btn {
+  background-color: #28a745; /* Green button */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%; /* Full width button */
+  margin-top: auto; /* Pushes button to the bottom if flex-direction column is used */
+}
+
+.add-to-cart-btn:hover {
+  background-color: #218838;
+}
+
+.wrapper{width: 980px; margin: 0 auto; padding: 20px;}
+
+/* --- Section Container Styling --- */
+.info-section {
+  padding: 70px 20px;
+  /* Vertical and horizontal padding */
+  margin: 20px auto;
+  /* Margin above/below, auto for horizontal centering */
+  max-width: 1177px;
+  /* Max width for content on large screens */
+  background-color: #f9f9f9;
+  /* Light background for the section */
+  border-radius: 10px;
+  /* Slightly rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  /* Subtle shadow */
+}
+
+/* --- Header Styling --- */
+.section-header {
+  font-family: 'Montserrat', sans-serif;
+  /* A modern, clean font */
+  font-size: 2.2rem;
+  /* Prominent size for desktop */
+  font-weight: 700;
+  /* Bold */
+  color: #333;
+  /* Dark gray for readability */
+  text-align: center;
+  margin-bottom: 30px;
+  /* Space below header */
+  position: relative;
+  padding-bottom: 10px;
+  /* Space for the underline */
+}
+
+/* Optional: Add a decorative underline to the header */
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  /* Length of the line */
+  height: 4px;
+  /* Thickness of the line */
+  background-color: #007bff;
+  /* Accent color */
+  border-radius: 2px;
+}
+
+.sub-heading{
+  font-family: 'Montserrat', sans-serif;
+    /* A modern, clean font */
+    font-size: 1.8rem;
+    /* Prominent size for desktop */
+    font-weight: 500;
+    /* Bold */
+    color: #fffcfc;
+    /* Dark gray for readability */
+    text-align: center;
+    margin-bottom: 30px;
+    /* Space below header */
+    position: relative;
+    padding-bottom: 10px;
+    /* Space for the underline */
+}
+
+
+
+/* --- Custom Bullet Point List Styling --- */
+.custom-bullet-list {
+  list-style: none;
+  /* Remove default browser bullet points */
+  padding: 0;
+  /* Remove default padding */
+  margin: 0;
+  /* Remove default margin */
+}
+
+.custom-bullet-list li {
+  font-family: 'Open Sans', sans-serif;
+  /* Readable sans-serif font */
+  font-size: 1.1rem;
+  /* Good size for list items */
+  color: #ffffff;
+  /* Slightly lighter text color */
+  margin-bottom: 15px;
+  /* Space between list items */
+  line-height: 1.6;
+  /* Good line height for readability */
+  padding-left: 30px;
+  /* Space for the custom icon */
+  position: relative;
+  /* For absolute positioning of the icon */
+  text-align: left;
+  /* Align text to the left */
+}
+
+/* Style for the custom icon/bullet point within each list item */
+.bullet-point-icon {
+  position: absolute;
+  left: 0;
+  /* Position at the very left */
+  top: 0;
+  /* Align with the top of the text */
+  font-size: 1.3rem;
+  /* Slightly larger than text for prominence */
+  color: #00ff3c;
+  /* Green color for checkmarks or positive indicators */
+  font-weight: bold;
+  line-height: 1.6;
+  /* Match list item's line height */
+}
+
+/* Last item in the list might not need bottom margin */
+.custom-bullet-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Responsiveness (adjust font sizes and padding for smaller screens) --- */
+@media (max-width: 768px) {
+  .info-section {
+    padding: 30px 15px;
+    margin: 30px auto;
+  }
+
+  .section-header {
+    font-size: 1.8rem;
+    /* Smaller header on tablets */
+    margin-bottom: 25px;
+  }
+
+  .custom-bullet-list li {
+    font-size: 1rem;
+    /* Smaller list text on tablets/mobiles */
+    padding-left: 25px;
+    margin-bottom: 12px;
+  }
+
+  .bullet-point-icon {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header {
+    font-size: 1.6rem;
+    /* Even smaller header on mobile phones */
+    margin-bottom: 20px;
+  }
+
+  .custom-bullet-list li {
+    font-size: 0.95rem;
+    /* Slightly smaller text on mobile */
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  .bullet-point-icon {
+    font-size: 1.1rem;
+  }
+
+}
+
+.feature-class {
+  padding-top: 70px;
+  background-image: url("/img/feature_image.jpg");
+  opacity: 1;
+  /* Replace with your image path */
+  background-size: cover;
+  /* Cover the entire area */
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+/* --- Base Footer Styling --- */
+.site-footer {
+  background-color: #2c3e50;
+  /* Dark background */
+  color: #ecf0f1;
+  /* Light text color */
+  padding: 40px 20px 20px;
+  /* Top, horizontal, bottom padding */
+  font-family: 'Open Sans', sans-serif;
+  /* Your preferred font */
+}
+
+/* --- Main Footer Container (for columns) --- */
+.footer-container {
+  display: flex;
+  /* Use flexbox for column layout */
+  flex-wrap: wrap;
+  /* Allow columns to wrap to the next line on smaller screens */
+  justify-content: space-between;
+  /* Distribute space between columns */
+  max-width: 1200px;
+  /* Max width for content on large screens */
+  margin: 0 auto;
+  /* Center the container */
+  padding-bottom: 30px;
+  /* Space above copyright bar */
+}
+
+/* --- Individual Footer Columns --- */
+.footer-col {
+  flex: 1;
+  /* Each column takes equal available space */
+  min-width: 250px;
+  /* Minimum width before wrapping */
+  margin: 0 15px 30px;
+  /* Horizontal margin and bottom margin */
+  /* Remove top margin for first column to align with footer-container padding-top */
+}
+
+.footer-col h3 {
+  font-family: 'Montserrat', sans-serif;
+  /* Header font */
+  font-size: 1.2rem;
+  color: #ffffff;
+  /* White headers */
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+/* Underline effect for headers */
+.footer-col h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  /* Length of underline */
+  height: 3px;
+  background-color: #007bff;
+  /* Accent color */
+  border-radius: 2px;
+}
+
+.footer-col p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* --- List Styles (for Quick Links, Customer Service) --- */
+.footer-col ul {
+  list-style: none;
+  /* Remove default bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  color: #bdc3c7;
+  /* Lighter gray for links */
+  text-decoration: none;
+  /* Remove underline */
+  font-size: 0.9rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-col ul li a:hover {
+  color: #007bff;
+  /* Accent color on hover */
+}
+
+/* --- Contact Info --- */
+.footer-col p .fa-icon {
+  /* Adjust if FontAwesomeIcon renders differently */
+  margin-right: 8px;
+  color: #007bff;
+  /* Accent color for icons */
+}
+
+/* --- Social Media Links --- */
+.social-links {
+  margin-top: 20px;
+}
+
+.social-links a {
+  color: #ecf0f1;
+  /* Icon color */
+  font-size: 1.5rem;
+  margin-right: 15px;
+  transition: color 0.2s ease-in-out;
+}
+
+.social-links a:hover {
+  color: #007bff;
+  /* Accent color on hover */
+}
+
+/* --- Copyright Bar --- */
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  /* Light separator line */
+}
+
+.footer-bottom p {
+  font-size: 0.85rem;
+  color: #bdc3c7;
+  margin: 0;
+}
+
+/* --- Responsive Adjustments --- */
+
+/* For smaller tablets and larger mobile devices (2 columns) */
+@media (max-width: 768px) {
+  .footer-container {
+    justify-content: center;
+    /* Center columns when they wrap */
+  }
+
+  .footer-col {
+    flex: 0 0 calc(50% - 30px);
+    /* Two columns, accounting for margin */
+    margin: 0 15px 30px;
+    /* Maintain horizontal margin */
+  }
+
+  /* Adjust min-width if columns still look too narrow */
+  .footer-col:nth-child(odd) {
+    /* Optional: fine-tune spacing for two columns */
+  }
+}
+
+/* For mobile devices (1 column) */
+@media (max-width: 480px) {
+  .footer-container {
+    flex-direction: column;
+    /* Stack columns vertically */
+    align-items: center;
+    /* Center stacked columns */
+    padding-bottom: 20px;
+  }
+
+  .footer-col {
+    width: 100%;
+    /* Full width */
+    max-width: 300px;
+    /* Max width for single column content */
+    margin: 0 0 25px;
+    /* Adjust margin for stacking */
+    text-align: center;
+    /* Center content within each stacked column */
+  }
+
+  .footer-col h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+    /* Center underline for centered headers */
+  }
+
+  .footer-col ul li,
+  .footer-col p {
+    text-align: center;
+    /* Center text within lists/paragraphs */
+  }
+
+  .social-links {
+    text-align: center;
+    /* Ensure social links are centered */
+  }
+}
+
+/* Left Section */
+.top-bar-left {
+  flex: 1;
+  /* Allow to grow */
+  text-align: left;
+
+  display: flex;
+  justify-content: flex-end;
+  /* Align items to the right */
+  align-items: center;
+  gap: 15px;
+}
+
+.top-bar-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #007bff;
+  /* Accent color */
+  text-decoration: none;
+}
+
+/* Center Section (Search Bar) */
+.top-bar-center {
+  flex: 2;
+  /* Allow to grow more than left/right */
+  display: flex;
+  justify-content: center;
+  /* Center the search bar */
+}
+
+.search-bar {
+  display: flex;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  /* Rounded search bar */
+  overflow: hidden;
+  /* Ensures border-radius applies to input */
+  max-width: 400px;
+  /* Limit search bar width */
+  width: 100%;
+}
+
+.search-input {
+  border: none;
+  padding: 8px 15px;
+  flex-grow: 1;
+  /* Input takes available space */
+  font-size: 0.9rem;
+  outline: none;
+  /* Remove blue outline on focus */
+}
+
+.search-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+/* Right Section (Cart & Auth) */
+.top-bar-right {
+  flex: 1;
+  /* Allow to grow */
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  /* Align items to the right */
+  align-items: center;
+  gap: 15px;
+  /* Space between links/icons */
+}
+
+.top-bar-icon-link {
+  color: #555;
+  /* Icon color */
+  font-size: 1.3rem;
+  text-decoration: none;
+  position: relative;
+  /* For cart count positioning */
+}
+
+.product-slider-container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  /* Max width for the slider content */
+  margin: 40px auto;
+  /* Center the slider container */
+  background-color: #ceb3b3;
+  /* Light background for the slider section */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.product-slider-container h2 {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Adjust spacing for individual product boxes within the slider */
+/* This targets the div wrapping ProductBox inside the slider */
+.slick-slide>div {
+  padding: 10px;
+  /* Add some space around each product box */
+  box-sizing: border-box;
+  /* Ensure padding is included in width */
+}
+
+/* Optional: Customizing Slick dots */
+.slick-dots li button:before {
+  font-size: 10px;
+  color: #bbb;
+  opacity: 0.75;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #007bff;
+  /* Active dot color */
+  opacity: 1;
+}
+
+/* Optional: Customizing Slick arrows */
+.slick-prev:before,
+.slick-next:before {
+  font-size: 30px;
+  color: #007bff;
+  /* Arrow color */
+  opacity: 0.8;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 1;
+  /* Ensure arrows are above content */
+}
+
+/* Position adjustments for arrows */
+.slick-prev {
+  left: -25px;
+  /* Adjust left position */
+}
+
+.slick-next {
+  right: -25px;
+  /* Adjust right position */
+}
+
+
+/* Responsive adjustments for overall container and text if needed */
+@media (max-width: 768px) {
+  .product-slider-container {
+    padding: 30px 10px;
+    margin: 30px auto;
+  }
+
+  .product-slider-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  /* Hide arrows on smaller screens if you configured them hidden in settings */
+  .slick-prev,
+  .slick-next {
+    display: none !important;
+  }
+}
+
+.no-products-message {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.user-menu {
+  position: relative;
+  display: inline-block;
+  font-family: sans-serif;
+  /* Example font */
+}
+
+.user-trigger {
+  background: none;
+  border: none;
+  color: inherit;
+  /* Inherit text color from parent */
+  cursor: pointer;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  /* Space between username and arrow */
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.user-trigger:hover {
+  background-color: #e0e0e0;
+  /* Light hover effect */
+}
+
+.dropdown-content {
+  display: none;
+  /* Hidden by default */
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  /* Ensure it appears above other content */
+  border-radius: 5px;
+  right: 0;
+  /* Align to the right of the trigger */
+  top: 100%;
+  /* Position below the trigger */
+  margin-top: 8px;
+  /* Small gap */
+  padding: 5px 0;
+  /* Padding inside the dropdown box */
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  /* Prevent text wrapping */
+  font-size: 0.95rem;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Class to show the dropdown */
+.dropdown-content.active {
+  display: block;
+}
+
+.dropdown-content hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 8px 0;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.filter-buttons button {
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #007bff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
+}
+
+.filter-buttons button:hover {
+  background-color: #e6f2ff;
+  transform: translateY(-2px);
+}
+
+.filter-buttons button.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+  font-weight: bold;
+}
+
